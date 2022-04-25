@@ -1,9 +1,11 @@
+from collections import defaultdict
 def solution(id_list, report, k):
-    answer = [0]*len(id_list)
-    temp={x:0 for x in id_list}
+    answer=[0]*len(id_list)
+    re_to=defaultdict(int)
     for i in set(report):
-        temp[i.split()[1]]+=1
+        re_to[i.split()[1]]+=1
     for i in set(report):
-        if temp[i.split()[1]]>=k:
+        if re_to[i.split()[1]]>=k:
             answer[id_list.index(i.split()[0])]+=1
     return answer
+        
