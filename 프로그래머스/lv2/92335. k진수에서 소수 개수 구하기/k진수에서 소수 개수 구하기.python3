@@ -1,0 +1,31 @@
+'''
+양의 정수 n, 이 숫자를 k진수로 바꿈. 변환된 수 안에 아래 조건에 맞는
+소수가 몇 개인지 알아보려 한다. 
+0으로 수를 나눈다. 
+1. 일단 그 숫자 통으로
+2. 오른쪽과 왼쪽에서 시작하여 0을 만날때까지
+3. 가운데 있는 수 중에 양쪽에 0이 있는 것
+'''
+import math
+def is_prime(x):
+    if x==1: return False
+    if x==2: return True
+    for i in range(2,int(math.sqrt(x))+1):
+        if x%i==0:return False
+    return True
+            
+
+def solution(n, k):
+    ans=''
+    cnt=0
+    while n!=0:
+        m=n%k
+        n=n//k  
+        ans+=str(m)
+    n_ans=ans[::-1].split('0')       #진법으로 만든 문자열
+    for i in n_ans:
+        if i=='': continue
+        if is_prime(int(i)):cnt+=1
+    return cnt
+    
+    
