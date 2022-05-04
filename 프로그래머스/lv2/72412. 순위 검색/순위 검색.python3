@@ -1,0 +1,42 @@
+from collections import defaultdict
+from itertools import combinations as combi
+def solution(info, query):
+    answer=[]
+    info_dict=defaultdict(list)
+    for i in info:
+        i=i.split()
+        info_val=int(i[-1])
+        info_key=i[:-1]
+        for i in range(5):
+            for c in combi(info_key,i):
+                tmp_key=''.join(c)
+                info_dict[tmp_key].append(info_val)
+    for key in info_dict.keys():
+        info_dict[key].sort()
+    for i in query:
+        i=i.split()
+        query_val=int(i[-1])
+        query_key=i[:-1]
+        for i in range(3):
+            query_key.remove('and')
+        while '-' in query_key:
+            query_key.remove('-')
+        query_key=''.join(query_key)
+        if query_key in info_dict:
+            scores=info_dict[query_key]
+            if len(scores)>0:
+                start=0
+                end=len(scores)
+                while end>start:
+                    mid=(start+end)//2
+                    if scores[mid]<query_val:
+                        start=mid+1
+                    else:
+                        end=mid
+                answer.append(len(scores)-start)
+        else:
+            answer.append(0)
+    return answer
+                
+        
+        
