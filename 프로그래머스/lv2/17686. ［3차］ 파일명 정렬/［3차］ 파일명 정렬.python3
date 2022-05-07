@@ -1,0 +1,22 @@
+'''
+이름순으로 정렬하면 파일 목록은 보기가 불편.
+
+'''
+def solution(files):
+    num="0123456789"
+    ans=[]
+    li=[['','',''] for i in range(len(files))]
+    for i in range(len(files)):
+        flag=True
+        for j in files[i]:
+            if j in num and flag:
+                li[i][1]+=j
+            elif li[i][1]=='':
+                li[i][0]+=j
+            else:
+                flag=False
+                li[i][2]+=j
+    li.sort(key=lambda x:(x[0].lower(),int(x[1])))
+    for i in li:
+        ans.append(''.join(i))
+    return (ans)
