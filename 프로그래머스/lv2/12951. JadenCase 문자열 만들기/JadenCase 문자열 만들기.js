@@ -1,17 +1,8 @@
 function solution(s) {
-    s=s.toLowerCase()
     let ans=''
-    let flag=true
-    for(let i of s){
-         if(flag&&i!==' '){
-            ans+=i.toUpperCase()
-            flag=false
-            continue
-        }
-        else if(i==' '){
-            flag=true
-        }
-        ans+=i 
+    for(let i=0;i<s.length;i++){
+        if(i===0||s[i-1]===' ')ans+=s[i].toUpperCase()
+        else ans+=s[i].toLowerCase()
     }
     return ans
 }
