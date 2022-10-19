@@ -1,7 +1,7 @@
 function solution(s) {
     s=s.toLowerCase()
-    ans=''
-    flag=true
+    let ans=''
+    let flag=true
     for(let i of s){
          if(flag&&i!==' '){
             ans+=i.toUpperCase()
