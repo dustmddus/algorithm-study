@@ -15,16 +15,13 @@ function solution(cacheSize, cities) {
         if(visited.includes(item)){
             total++
             visited=visited.filter((ele)=>ele!=item)
-            visited.push(item)
         }else{
             if(visited.length===cacheSize){
                 visited.shift()
-                visited.push(item)
-            }else{
-                visited.push(item)
             }
             total+=5
         }
+        visited.push(item)
     }
     return total
 }
