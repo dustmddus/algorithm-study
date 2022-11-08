@@ -1,19 +1,15 @@
-function solution(pro, speed) {
-    const day=pro.map((item,i)=>{
-        const result=Math.ceil((100-item)/speed[i])
-        return result
+function solution(pro, speeds) {
+    let day=pro.map((item,i)=>{
+        return Math.ceil((100-item)/speeds[i]) 
     })
-    let standard=day[0]
-    let cnt=0
-    let result=[]
-    for(let i of day){
-        if(standard>=i)cnt++
+    let answer=[0]
+    let maxNum=day[0]
+    for(let i=0,j=0;i<day.length;i++){
+        if(day[i]<=maxNum)answer[j]++
         else{
-            result.push(cnt)
-            standard=i
-            cnt=1
+            answer[++j]=1
+            maxNum=day[i]
         }
     }
-    result.push(cnt)
-    return result
+    return answer
 }
