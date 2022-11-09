@@ -1,29 +1,19 @@
 function solution(begin, target, words) {
-    begin=[...begin]
-    words=words.map((i)=>[...i])
-    visited={[begin]:0}
-    needVisit=[]
-    needVisit.push(begin)
-    while(needVisit.length!==0){
-        const node=needVisit.shift()
-        if(node.join('')===target){
-            break
-        }
-        for(let i=0;i<words.length;i++){
-            if(!visited[words[i]]&&check(words[i],node)){
-                visited[words[i]]=visited[node]+1
-                needVisit.push(words[i])
+    let answer=0
+    const queue=[]
+    visited=[]
+    queue.push([begin,answer])
+    visited.push(begin)
+    while(queue.length){
+        let [cur,cnt]=queue.shift()
+        if(cur===target)return cnt
+        words.forEach((item)=>{
+            let tmp=[...item].filter((ele,i)=>ele!==cur[i])
+            if(tmp.length===1&&!visited.includes(item)){
+                queue.push([item,++cnt])
+                visited.push(item)
             }
-        }
+        })
     }
-    return visited[[...target]]? visited[[...target]]: 0
-}
-
-const check=(words,node)=>{
-    let cnt=0
-    let len=node.length
-    for(let i=0;i<len;i++){
-        if(words[i]!==node[i]) cnt++
-    }
-    return cnt===1?true:false
+    return answer
 }
