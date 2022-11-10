@@ -1,21 +1,15 @@
-
 function solution(numbers, target) {
-    cnt=0
-    function dfs(i,total){
-        if(i===numbers.length){
-            if(total===target){
-                cnt+=1
+    let answer=0
+    const dfs=(idx,total)=>{
+        if(idx===numbers.length){
+            if(target===total){
+               answer++
             }
             return
         }
-        for(let c=0;c<2;c++){
-            if(c==0){
-                dfs(i+1,total+numbers[i])
-            }else{
-                dfs(i+1,total-numbers[i])
-            }
-        }
+        dfs(idx+1,total+numbers[idx])
+        dfs(idx+1,total-numbers[idx])
     }
     dfs(0,0)
-    return cnt
+    return answer
 }
