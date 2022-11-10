@@ -1,16 +1,18 @@
 function solution(begin, target, words) {
-    let answer=0
-    let queue=[]
     const visited=[]
+    const queue=[]
+    let answer=0
     queue.push([begin,answer])
+    
     while(queue.length){
-        let [cur,cnt]=queue.shift()
-        if(cur===target)return cnt
+        let [v,cnt]=queue.shift()
+        if(v===target)return cnt
+        visited.push(v)
         words.forEach((item)=>{
-            const tmp=[...item].filter((ele,i)=>ele!==cur[i])
+            const tmp=[...item].filter((ele,i)=>ele!==v[i])
             if(tmp.length===1&&!visited.includes(item)){
-                visited.push(item)
                 queue.push([item,++cnt])
+                visited.push(item)
             }
         })
     }
