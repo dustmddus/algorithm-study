@@ -1,15 +1,15 @@
 function solution(numbers, target) {
-    let answer=0
-    const dfs=(idx,total)=>{
+    let cnt=0
+    function dfs(idx,total){
         if(idx===numbers.length){
             if(target===total){
-               answer++
+                cnt++
             }
-            return
+            return 
         }
         dfs(idx+1,total+numbers[idx])
         dfs(idx+1,total-numbers[idx])
     }
     dfs(0,0)
-    return answer
+    return cnt
 }
